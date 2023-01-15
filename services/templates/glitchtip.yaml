@@ -150,12 +150,12 @@ variables:
   - id: $$config_email_use_tls
     name: EMAIL_USE_TLS
     label: Email Use TLS
-    defaultValue: 'false'
+    defaultValue: ''
     description: ''
   - id: $$config_email_use_ssl
     name: EMAIL_USE_SSL
     label: Email Use SSL
-    defaultValue: 'false'
+    defaultValue: ''
     description: ''
   - id: $$secret_email_smtp_password
     name: EMAIL_SMTP_PASSWORD
