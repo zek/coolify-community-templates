@@ -23,12 +23,6 @@ services:
       - REDIS_URL=$$secret_redis_url
       - DEFAULT_FROM_EMAIL=$$config_default_from_email
       - EMAIL_URL=$$secret_email_url
-      - EMAIL_HOST=$$config_email_host
-      - EMAIL_PORT=$$config_email_port
-      - EMAIL_HOST_USER=$$config_email_host_user
-      - EMAIL_HOST_PASSWORD=$$secret_email_host_password
-      - EMAIL_USE_TLS=$$config_email_use_tls
-      - EMAIL_USE_SSL=$$config_email_use_ssl
       - EMAIL_BACKEND=$$config_email_backend
       - MAILGUN_API_KEY=$$secret_mailgun_api_key
       - SENDGRID_API_KEY=$$secret_sendgrid_api_key
@@ -51,6 +45,7 @@ services:
       - REDIS_URL=$$secret_redis_url
       - DEFAULT_FROM_EMAIL=$$config_default_from_email
       - EMAIL_URL=$$secret_email_url
+      - EMAIL_BACKEND=$$config_email_backend
       - CELERY_WORKER_CONCURRENCY=$$config_celery_worker_concurrency
     ports: []
   $$id-migrate:
@@ -68,6 +63,7 @@ services:
       - REDIS_URL=$$secret_redis_url
       - DEFAULT_FROM_EMAIL=$$config_default_from_email
       - EMAIL_URL=$$secret_email_url
+      - EMAIL_BACKEND=$$config_email_backend
     ports: []
   $$id-postgresql:
     name: PostgreSQL
@@ -109,7 +105,7 @@ variables:
     name: EMAIL_URL
     label: SMTP Email URL
     defaultValue: >-
-      smtp://$$config_email_host_user:$$secret_email_host_password@$$config_email_host:$$config_email_port
+      smtp://user:pass@host
     description: ''
   - id: $$secret_database_url
     name: DATABASE_URL
@@ -126,41 +122,6 @@ variables:
     name: DEFAULT_FROM_EMAIL
     label: Default Email Address
     defaultValue: noreply@example.com
-    description: ''
-  - id: $$config_email_host
-    name: EMAIL_HOST
-    label: Email SMTP Host
-    defaultValue: ''
-    description: ''
-  - id: $$config_email_port
-    name: EMAIL_PORT
-    label: Email SMTP Port
-    defaultValue: '25'
-    description: ''
-  - id: $$config_email_host_user
-    name: EMAIL_HOST_USER
-    label: Email SMTP User
-    defaultValue: ''
-    description: ''
-  - id: $$secret_email_host_password
-    name: EMAIL_HOST_PASSWORD
-    label: Email SMTP Password
-    defaultValue: ''
-    description: ''
-  - id: $$config_email_use_tls
-    name: EMAIL_USE_TLS
-    label: Email Use TLS
-    defaultValue: ''
-    description: ''
-  - id: $$config_email_use_ssl
-    name: EMAIL_USE_SSL
-    label: Email Use SSL
-    defaultValue: ''
-    description: ''
-  - id: $$secret_email_smtp_password
-    name: EMAIL_SMTP_PASSWORD
-    label: SMTP Password
-    defaultValue: ''
     description: ''
   - id: $$config_email_backend
     name: EMAIL_BACKEND
