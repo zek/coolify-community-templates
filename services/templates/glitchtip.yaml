@@ -32,10 +32,8 @@ services:
       - EMAIL_BACKEND=$$config_email_backend
       - MAILGUN_API_KEY=$$secret_mailgun_api_key
       - SENDGRID_API_KEY=$$secret_sendgrid_api_key
-      - ENABLE_OPEN_USER_REGISTRATION=$$config_enable_open_user_registration
-      - DJANGO_SUPERUSER_EMAIL=$$config_django_superuser_email
-      - DJANGO_SUPERUSER_PASSWORD=$$secret_django_superuser_password
-      - DJANGO_SUPERUSER_USERNAME=$$config_django_superuser_username
+      - ENABLE_USER_REGISTRATION=$$config_enable_user_registration
+      - ENABLE_ORGANIZATION_REGISTRATION=$$config_enable_organization_registration
       - CELERY_WORKER_CONCURRENCY=$$config_celery_worker_concurrency
     ports:
       - '8000'
@@ -91,17 +89,6 @@ services:
     environment: []
     ports: []
 variables:
-  - id: $$config_django_superuser_username
-    name: DJANGO_SUPERUSER_USERNAME
-    label: Django Superuser Username
-    defaultValue: $$generate_username
-    description: ''
-  - id: $$secret_django_superuser_password
-    name: DJANGO_SUPERUSER_PASSWORD
-    label: Django Superuser Password
-    defaultValue: $$generate_password
-    description: ''
-    showOnConfiguration: true
   - id: $$config_port
     name: PORT
     label: GlitchTip Port
@@ -192,15 +179,15 @@ variables:
     defaultValue: ''
     description: ''
     showOnConfiguration: true
-  - id: $$config_enable_open_user_registration
-    name: ENABLE_OPEN_USER_REGISTRATION
-    label: Enable Open User Registration
+  - id: $$config_enable_user_registration
+    name: ENABLE_USER_REGISTRATION
+    label: Enable User Registration
     defaultValue: 'true'
     description: ''
-  - id: $$config_django_superuser_email
-    name: DJANGO_SUPERUSER_EMAIL
-    label: Django Superuser Email
-    defaultValue: noreply@example.com
+  - id: $$config_enable_organization_registration
+    name: ENABLE_ORGANIZATION_REGISTRATION
+    label: Enable Organization Registration
+    defaultValue: 'true'
     description: ''
   - id: $$config_postgres_user
     main: $$id-postgresql
